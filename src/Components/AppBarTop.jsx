@@ -15,8 +15,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRecoilState } from "recoil";
-import { isContactMe, isBlog } from "./Atoms/Recoil";
+import { isContactMe, isBlog, isDrawerOpen } from "./Atoms/Recoil";
+import TemporaryDrawer from "./Drawer";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,6 +65,11 @@ export default function PrimarySearchAppBar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [contactMe, setContactMe] = useRecoilState(isContactMe);
   const [message, setMessage] = useRecoilState(isBlog);
+  const [posts, setPosts] = React.useState([
+    { id: 1, content: "First post", updated: false },
+    { id: 2, content: "Second post", updated: true },
+  ]);
+  const [drawerOpen, setDrawerOpen] = useRecoilState(isDrawerOpen);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -77,12 +84,8 @@ export default function PrimarySearchAppBar() {
 
   const handleMessagebtn = () => {
     console.log("message button clicked");
-    if (!message) {
-      setMessage(true);
-      console.log("message changed to true in appbar");
-    } else {
-      setMessage(false);
-    }
+    setMessage(true);
+    console.log("message changed to true in appbar");
   };
 
   const handleMenuClose = () => {
@@ -102,6 +105,19 @@ export default function PrimarySearchAppBar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleBackClick = () => {
+    setMessage(false);
+    console.log("Navigated back to home page");
+  };
+
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
   };
 
   const menuId = "primary-search-account-menu";
@@ -149,11 +165,11 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 4 new mails"
-          color="inherit "
+          aria-label={`show ${posts.length} new mails`}
+          color="inherit"
           onClick={handleMessagebtn}
         >
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={posts.length} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -190,11 +206,24 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+          {drawerOpen && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="go back"
+              onClick={handleDrawerClose}
+              sx={{ mr: 2 }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          )}
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={handleDrawerOpen}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -220,10 +249,11 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              aria-label={`show ${posts.length} new mails`}
               color="inherit"
+              onClick={handleMessagebtn}
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={posts.length} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -264,6 +294,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {drawerOpen && <TemporaryDrawer />}
     </Box>
   );
 }

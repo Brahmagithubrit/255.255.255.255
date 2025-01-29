@@ -5,7 +5,7 @@ import { FaTwitterSquare } from "react-icons/fa";
 import { RiContactsFill } from "react-icons/ri";
 import { personalData } from "../Data/personalData.js";
 
-const TypingEffect = ({ textSegments, typingSpeed = 100 }) => {
+const TypingEffect = ({ textSegments, typingSpeed = 100, onComplete }) => {
   const [displayedText, setDisplayedText] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,10 @@ const TypingEffect = ({ textSegments, typingSpeed = 100 }) => {
         ]);
         index++;
         setTimeout(typeCharacter, typingSpeed);
+      } else {
+        if (onComplete) {
+          onComplete();
+        }
       }
     };
 
@@ -28,85 +32,40 @@ const TypingEffect = ({ textSegments, typingSpeed = 100 }) => {
     return () => {
       index = textSegments.length;
     };
-  }, [textSegments, typingSpeed]);
+  }, [textSegments, typingSpeed, onComplete]);
 
   return (
-    <>
-      {/* <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
-        <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
-          Hello, <br />
-          This is <span className=" text-pink-500">{personalData.name}</span>
-          { , I'm a Professional }
-          <span className=" text-[#16f2b3]">{personalData.designation}</span>.
-        </h1>
-
-        <div className="my-12 flex items-center gap-5">
-          <Link
-            to={personalData.github}
-            target="_blank"
-            className="transition-all text-pink-500 hover:scale-125 duration-300"
-          >
-            <BsGithub size={30} />
-          </Link>
-          <Link
-            to={personalData.linkedIn}
-            target="_blank"
-            className="transition-all text-pink-500 hover:scale-125 duration-300"
-          >
-            <BsLinkedin size={30} />
-          </Link>
-
-          <Link
-            to={personalData.twitter}
-            target="_blank"
-            className="transition-all text-pink-500 hover:scale-125 duration-300"
-          >
-            <FaTwitterSquare size={30} />
-          </Link>
+    <pre className=" order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] h-[600px]">
+      <div className="flex flex-row">
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
+        <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
+      </div>
+      <div className="px-4 lg:px-8 py-5">
+        <div className="flex flex-row space-x-2">
+          <div className="h-3 w-3 rounded-full bg-red-400"></div>
+          <div className="h-3 w-3 rounded-full bg-orange-400"></div>
+          <div className="h-3 w-3 rounded-full bg-green-200"></div>
         </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            to="#contact"
-            className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
-          >
-            <button className="px-3 text-xs md:px-8 py-3 md:py-4 bg-[#0d1224] rounded-full border-none text-center md:text-sm font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out  md:font-semibold flex items-center gap-1 hover:gap-3">
-              <span>Contact me</span>
-              <RiContactsFill size={16} />
-            </button>
-          </Link>
+      </div>
+      <div className=" overflow-auto border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[500px]">
+        <div className="flex gap-1 ml-[40px]">
+          <code className="font-mono text-xs md:text-sm lg:text-base whitespace-pre-wrap">
+            {displayedText.map((segment, idx) => (
+              <span key={idx} className={segment.style}>
+                {segment.text}
+              </span>
+            ))}
+            <span className="blink">|</span>
+          </code>
         </div>
-      </div> */}
-      <pre className=" order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] h-[600px]">
-        <div className="flex flex-row">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
-          <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
-        </div>
-        <div className="px-4 lg:px-8 py-5">
-          <div className="flex flex-row space-x-2">
-            <div className="h-3 w-3 rounded-full bg-red-400"></div>
-            <div className="h-3 w-3 rounded-full bg-orange-400"></div>
-            <div className="h-3 w-3 rounded-full bg-green-200"></div>
-          </div>
-        </div>
-        <div className=" overflow-auto border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[500px]">
-          <div className="flex gap-1 ml-[40px]">
-            <code className="font-mono text-xs md:text-sm lg:text-base whitespace-pre-wrap">
-              {displayedText.map((segment, idx) => (
-                <span key={idx} className={segment.style}>
-                  {segment.text}
-                </span>
-              ))}
-              <span className="blink">|</span>
-            </code>
-          </div>
-        </div>
-      </pre>
-    </>
+      </div>
+    </pre>
   );
 };
 
 const Profile = () => {
+  const [showTypingEffect, setShowTypingEffect] = useState(true);
+
   const messageSegments = [
     { text: "const ", style: "text-pink-500" },
     { text: "brahma", style: "text-white" },
@@ -206,7 +165,35 @@ const Profile = () => {
     { text: "\n};", style: "text-amber-300" },
   ];
 
-  return <TypingEffect textSegments={messageSegments} />;
+  return showTypingEffect ? (
+    <TypingEffect textSegments={messageSegments} onComplete={() => setShowTypingEffect(false)} />
+  ) : (
+    <pre className=" order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] h-[600px]">
+      <div className="flex flex-row">
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
+        <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
+      </div>
+      <div className="px-4 lg:px-8 py-5">
+        <div className="flex flex-row space-x-2">
+          <div className="h-3 w-3 rounded-full bg-red-400"></div>
+          <div className="h-3 w-3 rounded-full bg-orange-400"></div>
+          <div className="h-3 w-3 rounded-full bg-green-200"></div>
+        </div>
+      </div>
+      <div className=" overflow-auto border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[500px]">
+        <div className="flex gap-1 ml-[40px]">
+          <code className="font-mono text-xs md:text-sm lg:text-base whitespace-pre-wrap">
+            {messageSegments.map((segment, idx) => (
+              <span key={idx} className={segment.style}>
+                {segment.text}
+              </span>
+            ))}
+            <span className="blink">|</span>
+          </code>
+        </div>
+      </div>
+    </pre>
+  );
 };
 
 export default Profile;
