@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Card, CardContent, Button } from "@mui/material";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import aiImage from "../assets/ai.jpg"; 
 
 export default function UpdatePage() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -20,6 +22,10 @@ export default function UpdatePage() {
       post.id === id ? { ...post, updated: true } : post
     );
     setPosts(updatedPosts);
+  };
+
+  const handleReturnHome = () => {
+    navigate("/");
   };
 
   return (
@@ -70,6 +76,16 @@ export default function UpdatePage() {
             </CardContent>
           </Card>
         ))}
+      </div>
+      <div className="flex justify-center mt-6">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleReturnHome}
+          className="bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+        >
+          Return to Home
+        </Button>
       </div>
     </div>
   );
