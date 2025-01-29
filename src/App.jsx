@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrimarySearchAppBar from "./Components/AppBarTop";
 import Profile from "./Components/UserProfile";
 import CardList from "./Components/CardList";
@@ -8,8 +9,16 @@ import UpdatePage from "./Components/UpdatePage";
 import DashboardLayoutBasic from "./Components/Dashboard.jsx";
 import TemporaryDrawer from "./Components/Drawer.jsx";
 import SkeletonLoader from "./Components/SkeletonLoader";
+import SequenceGame from "./Components/SequenceGame";
+import ChessPuzzleGame from "./Components/ChessBoard.jsx";
+
 import { RecoilRoot } from "recoil";
-import { isContactMe, isBlog, isDrawerOpen, isDashboardOpen } from "./Components/Atoms/Recoil";
+import {
+  isContactMe,
+  isBlog,
+  isDrawerOpen,
+  isDashboardOpen,
+} from "./Components/Atoms/Recoil";
 
 function AppContent() {
   const [contactMe, setContactMe] = useRecoilState(isContactMe);
@@ -32,8 +41,8 @@ function AppContent() {
     );
     setTimeout(() => {
       setLoading(false);
-    }, 2000); 
-  }, [contactMe, blog, open , dashboardOpen]);
+    }, 2000);
+  }, [contactMe, blog, open, dashboardOpen]);
 
   if (loading) {
     return <SkeletonLoader />;
@@ -43,9 +52,8 @@ function AppContent() {
     <>
       <PrimarySearchAppBar />
       {dashboardOpen ? (
-       <DashboardLayoutBasic />
-      ): 
-        open ? (
+        <DashboardLayoutBasic />
+      ) : open ? (
         <TemporaryDrawer />
       ) : blog ? (
         <UpdatePage />
@@ -64,7 +72,16 @@ function AppContent() {
 function App() {
   return (
     <RecoilRoot>
-      <AppContent />
+      <Router>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="/sequencegame" element={<SequenceGame />} />
+          <Route
+            path="/chessstart"
+            element={<ChessPuzzleGame />} 
+          />
+        </Routes>
+      </Router>
     </RecoilRoot>
   );
 }

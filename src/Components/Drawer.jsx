@@ -16,15 +16,27 @@ import AllInboxIcon from "@mui/icons-material/AllInbox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReportIcon from "@mui/icons-material/Report";
 import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 import { isDrawerOpen, isDashboardOpen } from "./Atoms/Recoil";
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = useRecoilState(isDrawerOpen);
   const [dashboardOpen, setDashboardOpen] = useRecoilState(isDashboardOpen);
+  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  const handleGameStudioClick = () => {
+    navigate("/sequencegame");
+    setOpen(false);
+  };
+
+  const handleChessStartClick = () => {
+    navigate("/chessstart");
+    setOpen(false);
+  }
 
   const handleDashboardClick = () => {
     setDashboardOpen(true);
@@ -43,19 +55,19 @@ export default function TemporaryDrawer() {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleGameStudioClick}>
             <ListItemIcon>
               <StarIcon />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="Game Studio" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleChessStartClick}>
             <ListItemIcon>
               <SendIcon />
             </ListItemIcon>
-            <ListItemText primary="Send email" />
+            <ListItemText primary="Accept The Challenge" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
