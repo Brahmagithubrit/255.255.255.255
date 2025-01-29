@@ -135,11 +135,14 @@ const Profile = () => {
     { text: "['English', 'Hindi', 'Odia'],", style: "text-amber-300" },
     { text: "\n  achievements: ", style: "text-white" },
     {
-      text: "['Google Developer Student Club Member', 'IBM Intern'],",
+      text: "['College Rank Holder', 'HackerRank Software Engineer Intern'],",
       style: "text-amber-300",
     },
     { text: "\n  experience: ", style: "text-white" },
-    { text: "['Freelancer', 'Internship at IBM'],", style: "text-amber-300" },
+    {
+      text: "['Freelancer', 'IBM Skillbuild' , 'NullClass Edtech Private Limited'],",
+      style: "text-amber-300",
+    },
     { text: "\n  hardWorker: ", style: "text-white" },
     { text: "true,", style: "text-orange-400" },
     { text: "\n  quickLearner: ", style: "text-white" },
@@ -166,7 +169,10 @@ const Profile = () => {
   ];
 
   return showTypingEffect ? (
-    <TypingEffect textSegments={messageSegments} onComplete={() => setShowTypingEffect(false)} />
+    <TypingEffect
+      textSegments={messageSegments}
+      onComplete={() => setShowTypingEffect(false)}
+    />
   ) : (
     <pre className=" order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] h-[600px]">
       <div className="flex flex-row">
