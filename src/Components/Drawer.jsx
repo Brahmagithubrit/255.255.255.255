@@ -36,7 +36,7 @@ export default function TemporaryDrawer() {
   const handleChessStartClick = () => {
     navigate("/chessstart");
     setOpen(false);
-  }
+  };
 
   const handleDashboardClick = () => {
     setDashboardOpen(true);
@@ -75,7 +75,7 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <DraftsIcon />
             </ListItemIcon>
-            <ListItemText primary="Drafts" />
+            <ListItemText primary="Demo Section" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -86,7 +86,7 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <AllInboxIcon />
             </ListItemIcon>
-            <ListItemText primary="All mail" />
+            <ListItemText primary="Demo Section" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -94,7 +94,7 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <DeleteIcon />
             </ListItemIcon>
-            <ListItemText primary="Trash" />
+            <ListItemText primary="Demo Section" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -102,7 +102,7 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <ReportIcon />
             </ListItemIcon>
-            <ListItemText primary="Spam" />
+            <ListItemText primary="Demo Section" />
           </ListItemButton>
         </ListItem>
       </List>
