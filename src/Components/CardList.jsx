@@ -23,7 +23,7 @@ export default function CardList() {
   };
 
   const handleShareClick = (title) => {
-    const shareLink = `https://example.com/${title.replace(/\s+/g, "-").toLowerCase()}`;
+    const shareLink = `https://github.com/Brahmagithubrit`;
     if (navigator.share) {
       navigator
         .share({
@@ -42,8 +42,8 @@ export default function CardList() {
   };
 
   return (
-    <div className="order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37]">
-      <div className="title flex justify-center text-white text-2xl font-bold py-4">
+    <div className="order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative  border bg-gradient-to-r to-[#0a0d37]">
+      <div className="title font-mono flex justify-center text-white text-2xl font-bold py-4">
         Projects
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">

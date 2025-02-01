@@ -42,10 +42,10 @@ const ChessPuzzleGame = () => {
     const move = game.move({
       from: sourceSquare,
       to: targetSquare,
-      promotion: "q", // always promote to queen for simplicity
+      promotion: "q",
     });
 
-    if (move === null) return false; // illegal move
+    if (move === null) return false;
 
     if (move.san === puzzles[currentPuzzle].solution) {
       setMessage("Correct! Well done!");

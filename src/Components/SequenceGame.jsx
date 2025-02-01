@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Typewriter from "./Typing";
+import { Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
+
 const GRID_SIZE = 5 * 5; 
 
 let HIGHLIGHT_DURATION = 1000;
 let DELAY_BETWEEN_HIGHLIGHTS = 500;
 
 const MemorySequence = () => {
+  const navigate = useNavigate();
   const [sequence, setSequence] = useState([]);
   const [userSequence, setUserSequence] = useState([]);
   const [gameState, setGameState] = useState("idle");
@@ -109,9 +114,17 @@ const MemorySequence = () => {
   };
 
   return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-        
-      <h1 className="text-3xl font-mono mb-4"> <Typewriter   text={`Memory Sequence Game`} speed={50}/></h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate("/")}
+        sx={{ mb: 2 }}
+      >
+        Back to Home
+      </Button>
+      <h1 className="text-3xl font-mono mb-4">
+        <Typewriter text={`Memory Sequence Game`} speed={50}/>
+      </h1>
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
         {renderGrid()}
         <div className="flex justify-between mb-4">

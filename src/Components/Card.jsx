@@ -5,7 +5,6 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -31,7 +30,6 @@ export default function RecipeReviewCard({
   date,
   image,
   description,
-  method,
   isExpanded,
   onExpandClick,
   onFavoriteClick,
@@ -40,7 +38,14 @@ export default function RecipeReviewCard({
   onMoreClick,
 }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        width: 345,
+        height: 450, 
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -55,13 +60,18 @@ export default function RecipeReviewCard({
         title={title}
         subheader={date}
       />
-      <CardMedia component="img" height="194" image={image} alt="chat image" />
-      <CardContent>
+      <CardMedia
+        component="img"
+        sx={{ height: 200, objectFit: "cover" }} 
+        image={image}
+        alt="chat image"
+      />
+      <CardContent sx={{ flexGrow: 1 }}>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing sx={{ padding: 1 }}>
         <IconButton
           aria-label="add to favorites"
           onClick={onFavoriteClick}
@@ -81,7 +91,6 @@ export default function RecipeReviewCard({
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      
     </Card>
   );
 }

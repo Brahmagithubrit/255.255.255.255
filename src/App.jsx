@@ -6,43 +6,27 @@ import Profile from "./Components/UserProfile";
 import CardList from "./Components/CardList";
 import ContactMe from "./Components/ContactMe";
 import UpdatePage from "./Components/UpdatePage";
-import DashboardLayoutBasic from "./Components/Dashboard.jsx";
-import TemporaryDrawer from "./Components/Drawer.jsx";
+import DashboardLayoutBasic from "./Components/Dashboard";
 import SkeletonLoader from "./Components/SkeletonLoader";
 import SequenceGame from "./Components/SequenceGame";
-import ChessPuzzleGame from "./Components/ChessBoard.jsx";
-
+import ChessPuzzleGame from "./Components/ChessBoard";
 import { RecoilRoot } from "recoil";
+import Footer from "./Components/Footer";
 import {
   isContactMe,
   isBlog,
-  isDrawerOpen,
   isDashboardOpen,
 } from "./Components/Atoms/Recoil";
+import TechScroll from "./Components/TechScroll";
 
 function AppContent() {
-  const [contactMe, setContactMe] = useRecoilState(isContactMe);
-  const [blog, setBlog] = useRecoilState(isBlog);
-  const [drawerOpen, setDrawerOpen] = useRecoilState(isDrawerOpen);
-  const [open, setOpen] = useRecoilState(isDrawerOpen);
-  const [loading, setLoading] = useState(true);
-  const [dashboardOpen, setDashboardOpen] = useRecoilState(isDashboardOpen);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(
-      "contactMe:",
-      contactMe,
-      "blog:",
-      blog,
-      "drawerOpen:",
-      drawerOpen,
-      "dashboardOpen:",
-      dashboardOpen
-    );
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [contactMe, blog, open, dashboardOpen]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // });
 
   if (loading) {
     return <SkeletonLoader />;
@@ -51,20 +35,25 @@ function AppContent() {
   return (
     <>
       <PrimarySearchAppBar />
-      {dashboardOpen ? (
-        <DashboardLayoutBasic />
-      ) : open ? (
-        <TemporaryDrawer />
-      ) : blog ? (
-        <UpdatePage />
-      ) : contactMe ? (
-        <ContactMe />
-      ) : (
-        <>
-          <Profile />
-          <CardList />
-        </>
-      )}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Profile />
+              <TechScroll />
+              <CardList />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/dashboard" element={<DashboardLayoutBasic />} />
+        <Route path="/contact" element={<ContactMe />} />
+        <Route path="/blog" element={<UpdatePage />} />
+        {/* <Route path="/cards" element={} /> */}
+        <Route path="/sequencegame" element={<SequenceGame />} />
+        <Route path="/chessstart" element={<ChessPuzzleGame />} />
+      </Routes>
     </>
   );
 }
@@ -73,14 +62,7 @@ function App() {
   return (
     <RecoilRoot>
       <Router>
-        <Routes>
-          <Route path="/" element={<AppContent />} />
-          <Route path="/sequencegame" element={<SequenceGame />} />
-          <Route
-            path="/chessstart"
-            element={<ChessPuzzleGame />} 
-          />
-        </Routes>
+        <AppContent />
       </Router>
     </RecoilRoot>
   );
