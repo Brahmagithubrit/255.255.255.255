@@ -229,12 +229,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-4">
               <li className="text-center">
-                <a href="#" className="block group">
-                  <h4 className="font-medium group-hover:text-amber-300 transition-colors">
-                    Mastering React Hooks
-                  </h4>
-                  <p className="text-sm text-gray-400">June 15, 2023</p>
-                </a>
+                
               </li>
               <li className="text-center">
                 <a href="#" className="block group">
