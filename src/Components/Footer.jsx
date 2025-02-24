@@ -2,9 +2,7 @@ import {
   FaGithub,
   FaLinkedinIn,
   FaTwitter,
-  FaDribbble,
-  FaBehance,
-  FaMediumM,
+  
 } from "react-icons/fa";
 import { HiMail, HiPhone } from "react-icons/hi";
 import React from "react";
@@ -146,29 +144,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            <div className="mt-6">
-              <h4 className="text-lg font-medium mb-2">Follow Me</h4>
-              <div className="flex space-x-3">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaDribbble className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaBehance className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaMediumM className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
+            
           </div>
         </div>
 
@@ -183,19 +159,19 @@ const Footer = () => {
             </p>
             <div className="flex justify-center space-x-4">
               <a
-                href="#"
+                href="https://github.com/Brahmagithubrit"
                 className="text-gray-400 hover:text-amber-300 transition-colors"
               >
                 <FaGithub className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/brahmananda-tosh-770995266/"
                 className="text-gray-400 hover:text-amber-300 transition-colors"
               >
                 <FaLinkedinIn className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://x.com/Brahmanand3151"
                 className="text-gray-400 hover:text-amber-300 transition-colors"
               >
                 <FaTwitter className="w-6 h-6" />
@@ -288,60 +264,24 @@ const Footer = () => {
               <li className="flex items-center">
                 <HiMail className="w-5 h-5 mr-2 text-amber-300" />
                 <a
-                  href="mailto:john@example.com"
+                  href="mailto:brahmah7011@gmail.com"
                   className="hover:text-amber-300 transition-colors"
                 >
-                  john@example.com
+                  brahmah7011
                 </a>
               </li>
               <li className="flex items-center">
                 <HiPhone className="w-5 h-5 mr-2 text-amber-300" />
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+919337754996"
                   className="hover:text-amber-300 transition-colors"
                 >
-                  +1 (234) 567-890
+                  +91 9337754996
                 </a>
               </li>
             </ul>
-            <div className="mt-6 text-center">
-              <h4 className="text-lg font-medium mb-2">Follow Me</h4>
-              <div className="flex justify-center space-x-3">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaDribbble className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaBehance className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-amber-300 transition-colors"
-                >
-                  <FaMediumM className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
+           
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-          <p>&copy; 2023 John Doe. All rights reserved.</p>
-          <p className="mt-2">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            {" | "}
-            <a href="#" className="hover:text-white transition-colors">
-              Terms of Service
-            </a>
-          </p>
         </div>
       </div>
     </footer>

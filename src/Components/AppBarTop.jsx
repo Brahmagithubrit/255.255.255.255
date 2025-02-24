@@ -29,6 +29,7 @@ import {
   Send as SendIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SmallComponent/SearchBar";
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
@@ -126,9 +127,8 @@ window.location.href = "https://sayanythingbrahma.vercel.app/";
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             <b className="text-xl m-2">~ Dev / Brahma</b>
           </Typography>
-          <IconButton size="large" color="inherit">
-            <Badge badgeContent={4} color="error"></Badge>
-          </IconButton>
+          <SearchBar />
+          
           <IconButton
             size="large"
             edge="end"
