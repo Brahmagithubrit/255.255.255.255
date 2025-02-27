@@ -136,7 +136,7 @@ window.location.href = "https://sayanythingbrahma.vercel.app/";
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             <b className="text-xl m-2">~ Dev / Brahma</b>
-            <b className="text-xs m-2 lg:text-xl lg:ml-[75%] ">
+            <b className="text-xs m-2 lg:text-xl lg:ml-[67%] ">
               visits : {userVisit}
             </b>
           </Typography>
