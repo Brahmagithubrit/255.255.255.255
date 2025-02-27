@@ -30,7 +30,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SmallComponent/SearchBar";
-import {useState , useEffect} from "react"
+import { useState, useEffect } from "react";
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
@@ -40,11 +40,37 @@ export default function PrimarySearchAppBar() {
   const [userVisit, setUserVisit] = useState(0);
 
   useEffect(() => {
-    let totalVisit = localStorage.getItem("userVisit");
-    let initialCount = totalVisit ? Number(totalVisit) : 0;
-    setUserVisit(initialCount + 1);
+    
+    let baseNumber = localStorage.getItem("userBaseNumber");
+    if (!baseNumber) {
+      // this is hardcoded for now  , later i store and use value 
+      baseNumber = Math.floor(Math.random() * 20); 
+      localStorage.setItem("userBaseNumber", baseNumber);
+    }
+    baseNumber = Number(baseNumber);
 
-    localStorage.setItem("userVisit", initialCount + 1);
+    
+    let totalVisits = localStorage.getItem("userTotalVisits");
+    totalVisits = totalVisits ? Number(totalVisits) : 0;
+
+   
+    let sessionCount = sessionStorage.getItem("sessionVisit");
+    sessionCount = sessionCount ? Number(sessionCount) : 0;
+
+    
+    let newDisplayValue = baseNumber + sessionCount;
+
+    
+    if (newDisplayValue <= totalVisits) {
+      newDisplayValue = totalVisits + 1; 
+    }
+
+   
+    setUserVisit(newDisplayValue);
+
+   
+    sessionStorage.setItem("sessionVisit", sessionCount + 1);
+    localStorage.setItem("userTotalVisits", newDisplayValue);
   }, []);
 
   const toggleDrawer = (newOpen) => () => {
@@ -66,7 +92,7 @@ export default function PrimarySearchAppBar() {
     }
     setMenuOpen(false);
   };
-  
+
   const handleContactMe = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -78,16 +104,16 @@ export default function PrimarySearchAppBar() {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-window.location.href = "https://sayanythingbrahma.vercel.app/";    
+    window.location.href = "https://sayanythingbrahma.vercel.app/";
     setMenuOpen(false);
-  }
+  };
   const handleReadBlogs = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     navigate("/blog");
     setMenuOpen(false);
-  }
+  };
 
   const drawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
