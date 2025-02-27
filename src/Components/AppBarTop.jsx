@@ -30,12 +30,22 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SmallComponent/SearchBar";
+import {useState , useEffect} from "react"
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const [userVisit, setUserVisit] = useState(0);
+
+  useEffect(() => {
+    let totalVisit = localStorage.getItem("userVisit");
+    let initialCount = totalVisit ? Number(totalVisit) : 0;
+    setUserVisit(initialCount + 1);
+
+    localStorage.setItem("userVisit", initialCount + 1);
+  }, []);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -126,9 +136,13 @@ window.location.href = "https://sayanythingbrahma.vercel.app/";
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             <b className="text-xl m-2">~ Dev / Brahma</b>
+            <b className="text-xs m-2 lg:text-xl lg:ml-[75%] ">
+              visits : {userVisit}
+            </b>
           </Typography>
+
           <SearchBar />
-          
+
           <IconButton
             size="large"
             edge="end"

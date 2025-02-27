@@ -21,6 +21,7 @@ import TechScroll from "./Components/TechScroll";
 
 function AppContent() {
   const [loading, setLoading] = useState(false);
+  
 
   // useEffect(() => {
   //   setTimeout(() => {
